@@ -1,17 +1,21 @@
-﻿using YoutubeApi.Domain.Common;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using YoutubeApi.Domain.Common;
 
-namespace YoutubeApi.Domain.Entities;
-
-public class Brand:EntityBase
+namespace YoutubeApi.Domain.Entities
 {
-    public Brand()
+    public class Brand : EntityBase
     {
-        
+        public Brand()
+        {
+        }
+        public Brand(string name)
+        {
+            Name = name;
+        }
+        public string Name { get; set; }
     }
-
-    public Brand(string name)
-    {
-        Name=name;
-    }
-    public required string Name{ get; set; }
 }

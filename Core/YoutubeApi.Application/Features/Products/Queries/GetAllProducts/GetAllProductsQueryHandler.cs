@@ -34,7 +34,9 @@ namespace YoutubeApi.Application.Features.Products.Queries.GetAllProducts
             //    {
             //        Title = product.Title,
             //        Description = product.Description,
-            //        Discount = product.Discount,
+            //        Discount = product.Discount,c
+
+
             //        Price = product.Price - (product.Price * product.Discount / 100),
             //    });
 

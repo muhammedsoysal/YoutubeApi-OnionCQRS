@@ -16,6 +16,7 @@ public class AppDbContext : DbContext
     public List<Category> Categories { get; set; }
     public List<Detail>Details { get; set; }
     public List<Product>Products{ get; set; }
+    public List<ProductCategory>ProductCategories{ get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

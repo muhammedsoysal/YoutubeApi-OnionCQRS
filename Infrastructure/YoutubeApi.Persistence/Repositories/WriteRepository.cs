@@ -26,7 +26,7 @@ namespace YoutubeApi.Persistence.Repositories
             await table.AddAsync(entity);
         }
 
-        public async Task AddRangeAsync(List<T> entities)
+        public async Task AddRangeAsync(IList<T> entities)
         {
             await table.AddRangeAsync(entities);
         }
@@ -40,6 +40,11 @@ namespace YoutubeApi.Persistence.Repositories
         public async Task HardDeleteAsync(T entity)
         {
             await Task.Run(() => table.Remove(entity));
+        }
+
+        public async Task HardDeleteRangeAsync(IList<T> entity)
+        {
+            await Task.Run((() => table.RemoveRange(entity)));
         }
     }
 }

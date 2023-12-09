@@ -19,7 +19,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "YoutubeApi.Persistence", "I
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "YoutubeApi.Api", "Presentation\YoutubeApi.Api\YoutubeApi.Api.csproj", "{38DDDF03-884D-4A04-A40B-4BDFEC5137A4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YoutubeApi.Mapper", "Core\YoutubeApi.Mapper\YoutubeApi.Mapper.csproj", "{CA72124A-5C38-4950-B34A-B28863BC8319}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "YoutubeApi.Mapper", "Core\YoutubeApi.Mapper\YoutubeApi.Mapper.csproj", "{CA72124A-5C38-4950-B34A-B28863BC8319}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

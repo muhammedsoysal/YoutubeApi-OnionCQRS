@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
+using System.Security;
 using System.Security.Claims;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
@@ -41,7 +43,7 @@ namespace YoutubeApi.Infrastructure.Tokens
 			var token = new JwtSecurityToken(
 				issuer: _tokenSettings.Issuer,
 				audience: _tokenSettings.Audience,
-				expires: DateTime.Now.AddMinutes(_tokenSettings.TokenValidityInMunitues),
+				expires: DateTime.Now.AddMinutes(_tokenSettings.TokenValidityInMinutes),
 				claims: claims,
 				signingCredentials: new SigningCredentials(key, SecurityAlgorithms.HmacSha256)
 			);
@@ -53,12 +55,32 @@ namespace YoutubeApi.Infrastructure.Tokens
 
 		public string GenerateRefreshToken()
 		{
-			throw new NotImplementedException();
+			var randomNumber = new byte[64];
+			using var rng = RandomNumberGenerator.Create();
+			rng.GetBytes(randomNumber);
+			return Convert.ToBase64String(randomNumber);
 		}
 
-		public ClaimsPrincipal? GetPrincipalFromExpiredToken()
+		public ClaimsPrincipal? GetPrincipalFromExpiredToken(string? token)
 		{
-			throw new NotImplementedException();
+			TokenValidationParameters tokenValidationParameters = new()
+			{
+				ValidateIssuer = false,
+				ValidateAudience = false,
+				ValidateIssuerSigningKey = true,
+				IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_tokenSettings.Secret)),
+				ValidateLifetime = false
+			};
+
+			JwtSecurityTokenHandler tokenHandler = new();
+			var principal =
+				tokenHandler.ValidateToken(token, tokenValidationParameters, out SecurityToken securityToken);
+			if (securityToken is not JwtSecurityToken jwtSecurityToken ||
+			    !jwtSecurityToken.Header.Alg.Equals(SecurityAlgorithms.HmacSha256,
+				    StringComparison.InvariantCultureIgnoreCase))
+			throw new SecurityException("Token Bulunamadı.");
+
+			return principal;
 		}
 	}
 }

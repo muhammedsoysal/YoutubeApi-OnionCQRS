@@ -7,7 +7,7 @@ using YoutubeApi.Application.Bases;
 
 namespace YoutubeApi.Application.Features.Products.Exceptions
 {
-	internal class ProductTitleMustNotBeSameException:BaseExceptions
+	internal class ProductTitleMustNotBeSameException:BaseException
 	{
 		public ProductTitleMustNotBeSameException():base("Ürün başlığı zaten var!"){}
 	}

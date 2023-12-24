@@ -1,16 +1,17 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.Http;
+using YoutubeApi.Application.Bases;
+using YoutubeApi.Application.Interfaces.AutoMapper;
 using YoutubeApi.Application.UnitOfWorks;
 using YoutubeApi.Domain.Entities;
 
 namespace YoutubeApi.Application.Features.Products.Command.DeleteProduct;
 
-public class DeleteProductCommandHandler : IRequestHandler<DeleteProductCommandRequest,Unit>
+public class DeleteProductCommandHandler : BaseHandler,IRequestHandler<DeleteProductCommandRequest,Unit>
 {
-    private readonly IUnitOfWork _unitOfWork;
 
-    public DeleteProductCommandHandler(IUnitOfWork unitOfWork)
-    {
-        _unitOfWork = unitOfWork;
+    public DeleteProductCommandHandler(IMapper mapper, IUnitOfWork unitOfWork, IHttpContextAccessor httpContextAccessor) : base(mapper, unitOfWork, httpContextAccessor)
+	{
     }
 
     public async Task<Unit> Handle(DeleteProductCommandRequest request, CancellationToken cancellationToken)

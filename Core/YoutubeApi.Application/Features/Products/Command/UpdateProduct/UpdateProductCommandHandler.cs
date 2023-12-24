@@ -1,19 +1,16 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.Http;
+using YoutubeApi.Application.Bases;
 using YoutubeApi.Application.Interfaces.AutoMapper;
 using YoutubeApi.Application.UnitOfWorks;
 using YoutubeApi.Domain.Entities;
 
 namespace YoutubeApi.Application.Features.Products.Command.UpdateProduct;
 
-public class UpdateProductCommandHandler : IRequestHandler<UpdateProductCommandRequest,Unit>
+public class UpdateProductCommandHandler :BaseHandler, IRequestHandler<UpdateProductCommandRequest,Unit>
 {
-    private readonly IUnitOfWork _unitOfWork;
-    private readonly IMapper _mapper;
-
-    public UpdateProductCommandHandler(IUnitOfWork unitOfWork, IMapper mapper)
-    {
-        this._unitOfWork = unitOfWork;
-        this._mapper = mapper;
+    public UpdateProductCommandHandler(IMapper mapper, IUnitOfWork unitOfWork, IHttpContextAccessor httpContextAccessor) : base(mapper, unitOfWork, httpContextAccessor)
+	{
     }
 
     public async Task<Unit> Handle(UpdateProductCommandRequest request, CancellationToken cancellationToken)

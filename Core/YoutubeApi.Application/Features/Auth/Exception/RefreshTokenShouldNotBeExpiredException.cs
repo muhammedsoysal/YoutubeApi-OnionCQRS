@@ -7,8 +7,8 @@ using YoutubeApi.Application.Bases;
 
 namespace YoutubeApi.Application.Features.Auth.Exception
 {
-	public class UserAlreadyExistException : BaseException
+	public class RefreshTokenShouldNotBeExpiredException : BaseException
 	{
-		public UserAlreadyExistException() : base("Böyle bir kullanıcı zaten var!") { }
+		public RefreshTokenShouldNotBeExpiredException() : base("Oturum süresi sona ermiştir. Lütfen tekrar giriş yapın.") { }
 	}
 }

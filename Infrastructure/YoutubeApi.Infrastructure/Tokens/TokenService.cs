@@ -18,13 +18,13 @@ namespace YoutubeApi.Infrastructure.Tokens
 	public class TokenService : ITokenService
 	{
 		private readonly TokenSettings _tokenSettings;
-		private readonly UserManager<User> _userManager;
-		public TokenService(IOptions<TokenSettings> options, UserManager<User> userManager)
+		private readonly UserManager<User?> _userManager;
+		public TokenService(IOptions<TokenSettings> options, UserManager<User?> userManager)
 		{
 			_tokenSettings = options.Value;
 			_userManager = userManager;
 		}
-		public async Task<JwtSecurityToken> CreateToken(User user, IList<string> roles)
+		public async Task<JwtSecurityToken> CreateToken(User? user, IList<string> roles)
 		{
 			var claims = new List<Claim>()
 			{
